@@ -1,0 +1,33 @@
+.ModalWrapper {
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+}
+
+.BackgroundWrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: #99B2DD;
+    width: 70vw;
+    height: 60vh;
+    border-radius: 2%;
+}
+
+.CloseButton {
+    display: flex;
+    margin: 2vh 1vw 0 auto;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.CloseButton:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.TitleWrapper {
+    display: flex;
+}
