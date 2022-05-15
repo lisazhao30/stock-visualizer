@@ -1,16 +1,17 @@
 .ModalWrapper {
     display: flex;
     justify-content: center;
-    z-index: 10;
+    z-index: 999;
 }
 
 .BackgroundWrapper {
     display: flex;
     flex-direction: column;
-    background-color: #99B2DD;
+    background-color: #F8E9E9;
     width: 70vw;
-    height: 60vh;
+    min-height: 30vh;
     border-radius: 2%;
+    position: fixed;
 }
 
 .CloseButton {
@@ -30,4 +31,20 @@
 
 .TitleWrapper {
     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    width: 50px;
+    height: 50px;
+    margin-right: 2vw;
+}
+
+.StockDescription {
+    margin: 0 2vw 2vh 2vw;
+}
+
+.StockDescription h3 {
+    text-align: center;
 }

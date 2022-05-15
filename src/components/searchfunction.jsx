@@ -1,46 +1,31 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
+import Button from '@mui/material/Button';
 import ProfileModal from './profilemodal';
 import Graph from './graph';
-//import { styled } from '@mui/material/styles';
 import '../css/searchfunction.scss';
 
 const SearchFunction = () => {
-    const APIKey = '5e0db82a6df4ba9be281b7eaef28032b';
+    const APIKey = '5879623d3df37784d9669108e4669e11';
     const url = 'https://financialmodelingprep.com/api/v3';
-    const [entireSymbolList, setEntireSymbolList] = useState({});
     const [searchedItem, setSearchedItem] = useState("");
+    const [showButton, setShowButton] = useState(false)
     const [showModal, setShowModal] = useState(false);
-    let error = "";
 
     const toggleModal = () => {
         setShowModal(true);
     }
-
-    const getSymbolList = async () => {
-        try {
-            const response = await axios.get(`${url}/profile/AAPL?apikey=${APIKey}`);
-            setEntireSymbolList(response);
-        }
-        catch (error) {
-            console.log(error)
-        }
-    };
-    useEffect(() => {
-        getSymbolList();
-    }, [])
 
     const props = { APIKey, url, showModal, setShowModal, searchedItem}
 
     return (
         <div className="Wrapper">
             <div className="SearchWrapper">
-                <TextField onChange={(e) => setSearchedItem(e.target.value)} sx={{
+                <TextField placeholder="Enter stock symbol name" onChange={(e) => setSearchedItem(e.target.value)} sx={{
                     'width': '30vw'
                 }}/>
-                <SearchIcon sx={{
+                <SearchIcon onClick={() => setShowButton(true)} sx={{
                     '&:hover': {
                         'cursor': 'pointer',
                         'transform': 'scale(1.1)'
@@ -48,11 +33,16 @@ const SearchFunction = () => {
                 }} />
             </div>
             <div className="button">
-                <button onClick={() => toggleModal()}>
+                <Button variant="contained" disabled={showButton === false} data-testid="testButtonLength" onClick={() => toggleModal()}
+                sx={{
+                    backgroundColor: "#4bc0c0"
+                }}>
                     Show Profile
-                </button>
+                </Button>
             </div>
-            <ProfileModal {...props} />
+            {/* to only show the profile modal and pass props in after searching, do {boolean is true && modal} */}
+                {showButton && <ProfileModal data-testid="testShow" {...props} />}
+                {showButton && <Graph {...props} />}
         </div>
     )
 }
